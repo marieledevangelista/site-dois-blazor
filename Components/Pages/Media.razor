@@ -1,0 +1,37 @@
+@page "/media"
+@rendermode InteractiveServer
+
+<h1>Calculadora de Média do Aluno</h1>
+
+<label>Nota 1:</label>
+<input type="number" @bind="nota1" />
+
+<label>Nota 2:</label>
+<input type="number" @bind="nota2" />
+
+<button @onclick="CalcularMedia">Calcular Média</button>
+
+@if (media.HasValue)
+{
+    <p>Média: @media.Value.ToString("F2")</p>
+
+    @if (media >= 7.0)
+    {
+        <p style="color: green;">Aprovado!</p>
+    }
+    else
+    {
+        <p style="color: red;">Reprovado!</p>
+    }
+}
+
+@code {
+    private double nota1;
+    private double nota2;
+    private double? media = null;
+
+    private void CalcularMedia()
+    {
+        media = (nota1 + nota2) / 2;
+    }
+}
